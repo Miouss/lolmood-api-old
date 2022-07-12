@@ -1,6 +1,6 @@
 <?php
 
-function getGameStats($puuid, $gameId, $gameStats, $itemsData){
+function getGameStats($puuid, $gameStats, $itemsData){
     $participantId = null;
     $participantItemsPurchased = array();
     $participantSkillsOrder = "";
