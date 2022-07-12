@@ -4,7 +4,7 @@ I personnaly use Laragon, you can download it here : https://laragon.org/
 
 Make sure to use the lastest version of PHP : [https://windows.php.net/download/](Windows) [https://www.php.net/downloads.php](Other OS)
 
-### Create de the database
+### Create the database
 
 To create the database, use the script in api/config/database.sql
 
