@@ -21,18 +21,13 @@ function getAccount($host){
         }
     }
 
-    if(curl_errno($curl)){
-        $errorMessage = 'Riot Api Account Data request -> ' . curl_error($curl);
-        curl_close($curl);
-        throw new Exception($errorMessage);
-    }
     curl_close($curl);
 
     $databaseApi .= $updatedAccount['puuid'];
 
-    $accountStored = apiGetRequest($curl, $databaseApi);
+    $accountStored = apiGetRequest($curl, $databaseApi, false, false);
 
-    if(curl_errno($curl)){
+    if(!$accountStored){
         apiPostRequest('Account', 'create', $updatedAccount);
     } else{
         $updatedData = array();

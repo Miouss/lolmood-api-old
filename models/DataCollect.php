@@ -126,6 +126,13 @@ try {
         $account = getAccount($host);
         $gameHistoryData = getGameHistoryData($account['puuid'], $region);
 
+        $errorMessage = "";
+
+        if(array_key_exists("error", $gameHistoryData)){
+            $errorMessage = $gameHistoryData["error"] . " games couldn't be retrived";
+        }
+
+        unset($gameHistoryData["error"]);
         unset($account['puuid']);
 
         $keyStats = getKeyStats($gameHistoryData);
@@ -139,6 +146,10 @@ try {
             "GameHistoryData" => $gameHistoryData,
             "KeyStats" => $keyStats
         );
+
+        if($errorMessage !== ""){
+            $data["ErrorMessage"] = $errorMessage;
+        }
 
         echo json_encode($data);
     } else {
