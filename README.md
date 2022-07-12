@@ -2,7 +2,7 @@
 ### Use a Xammp server
 I personnaly use Laragon, you can download it here : https://laragon.org/
 
-Make sure to use the lastest version of PHP : [https://windows.php.net/download/](Windows) [https://www.php.net/downloads.php](Other OS)
+Make sure to use the lastest version of PHP : [Windows](https://windows.php.net/download/) - [Other OS](https://www.php.net/downloads.php)
 
 ### Create the database
 
