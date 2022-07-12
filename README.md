@@ -1,6 +1,3 @@
-# lol-mood-api
-Lol mood api is an API Rest underdeveloppement using Riot Public API to retrieve key stats from a player of the game League of Legends
-
 ## Test the API yourself locally
 ### Use a Xammp server
 I personnaly use Laragon, you can download it here : https://laragon.org/
