@@ -5,26 +5,26 @@ function getChampStats($champName){
     return $champStats;
 }
 
-function sortStatsArray(&$statsArray, $type, $multipleArray = false){
-    $uniqueArray = [];
+function sortStatsArrays(&$statsArrays, $type, $multipleArray = false){
+    $uniqueStatsArrays = [];
 
-    $totalPlayed = sizeof($statsArray);
+    $totalPlayed = sizeof($statsArrays);
 
-    foreach($statsArray as $key => &$singleArray){
+    foreach($statsArrays as $key => &$statsArray){
         $arrayExist = false;
 
-        unset($statsArray[$key]);
+        unset($statsArrays[$key]);
 
-        if((is_array($singleArray[0]) ? in_array(0, $singleArray[0]) : $singleArray[0] === 0)){
+        if((is_array($statsArray[0]) ? in_array(0, $statsArray[0]) : $statsArray[0] === 0)){
             $arrayExist = true;
             --$totalPlayed;
         }else{
-            foreach($uniqueArray as &$array){
-                if($array[$type] === $singleArray[0]){
+            foreach($uniqueStatsArrays as &$uniqueStatsArray){
+                if($uniqueStatsArray[$type] === $statsArray[0]){
                     $arrayExist = true;
 
-                    ++$array['played'];
-                    $array['win'] += $singleArray[1]; 
+                    ++$uniqueStatsArray['played'];
+                    $uniqueStatsArray['win'] += $statsArray[1]; 
                 
                     break;
                 }
@@ -32,34 +32,34 @@ function sortStatsArray(&$statsArray, $type, $multipleArray = false){
         }
 
         if(!$arrayExist){
-            array_push($uniqueArray, array($type => $singleArray[0], "played" => 1, "win" => $singleArray[1]));
+            array_push($uniqueStatsArrays, array($type => $statsArray[0], "played" => 1, "win" => $statsArray[1]));
         }
     }
 
-    uasort($uniqueArray, function($a, $b){
+    uasort($uniqueStatsArrays, function($a, $b){
         return ($a['played'] > $b['played']) ? -1 : 1;
     });
 
-    if(sizeof($uniqueArray) > 0){
-        $mostPlayed[0] = $uniqueArray[array_key_first($uniqueArray)];
+    if(sizeof($uniqueStatsArrays) > 0){
+        $mostPlayed[0] = $uniqueStatsArrays[array_key_first($uniqueStatsArrays)];
         $mostPlayed[0]["playRate"] = round($mostPlayed[0]["played"] / $totalPlayed * 100, 2);
 
         if($multipleArray){
-            $keys = array_keys($uniqueArray);
+            $keys = array_keys($uniqueStatsArrays);
 
-            for($i = 1; $i < sizeof($uniqueArray); $i++){
+            for($i = 1; $i < sizeof($uniqueStatsArrays); $i++){
                 if($i === 3){
                     break;
                 }
 
-                $mostPlayed[$i] =  $uniqueArray[$keys[$i]];
+                $mostPlayed[$i] =  $uniqueStatsArrays[$keys[$i]];
                 $mostPlayed[$i]["playRate"] = round($mostPlayed[$i]["played"] / $totalPlayed * 100, 2);
             }
         }
 
         $playedReference = $mostPlayed[0]['played'] / 4;
 
-        uasort($uniqueArray, function($a, $b) use ($playedReference){
+        uasort($uniqueStatsArrays, function($a, $b) use ($playedReference){
             if($b['played'] >= $playedReference && $b['win']/ $b['played'] * 100 >= 50){
                 return ($a['win']/$a['played'] > $b['win']/ $b['played']) ? -1 : 1;
             }else{
@@ -69,20 +69,20 @@ function sortStatsArray(&$statsArray, $type, $multipleArray = false){
 
 
 
-        $mostWinrate[0] = $uniqueArray[array_key_first($uniqueArray)];
-        $mostWinrate[0]["winRate"] = round($mostPlayed[0]["win"] /$mostPlayed[0]["played"] * 100, 2);
+        $mostWinrate[0] = $uniqueStatsArrays[array_key_first($uniqueStatsArrays)];
+        $mostWinrate[0]["winRate"] = round($mostWinrate[0]["win"] /$mostWinrate[0]["played"] * 100, 2);
 
         $mostPlayed[0]["played"] = $totalPlayed;
         
         if($multipleArray){
-            $keys = array_keys($uniqueArray);
+            $keys = array_keys($uniqueStatsArrays);
 
-            for($i = 1; $i < sizeof($uniqueArray); $i++){
+            for($i = 1; $i < sizeof($uniqueStatsArrays); $i++){
                 if($i === 3){
                     break;
                 }
 
-                $mostWinrate[$i] = $uniqueArray[$keys[$i]];
+                $mostWinrate[$i] = $uniqueStatsArrays[$keys[$i]];
                 $mostWinrate[$i]["winRate"] = round($mostPlayed[$i]["win"] /$mostPlayed[$i]["played"] * 100, 2);
         
                 $mostPlayed[$i]["played"] = $totalPlayed;
