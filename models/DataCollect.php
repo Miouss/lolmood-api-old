@@ -71,16 +71,16 @@ try {
 
             echo json_encode(array(
                 "skills" => sortSkillsOrder($skillsOrder),
-                "runes" => sortStatsArray($runesArray, "runes"),
-                "statsMods" => sortStatsArray($statsModsArray, "statsMods"),
-                "startItems" => sortStatsArray($startItemsArray, "startItems"),
+                "runes" => sortStatsArrays($runesArray, "runes"),
+                "statsMods" => sortStatsArrays($statsModsArray, "statsMods"),
+                "startItems" => sortStatsArrays($startItemsArray, "startItems"),
                 "completedItems" => array(
-                    "coreItems" => sortStatsArray($coreItemsArray, "coreItems"),
-                    "fourthItem" => sortStatsArray($fourthItemsArray, "fourthItem", true),
-                    "fifthItem" => sortStatsArray($fifthItemsArray, "fifthItem", true),
-                    "sixthItem" => sortStatsArray($sixthItemsArray, "sixthItem", true)                    
+                    "coreItems" => sortStatsArrays($coreItemsArray, "coreItems"),
+                    "fourthItem" => sortStatsArrays($fourthItemsArray, "fourthItem", true),
+                    "fifthItem" => sortStatsArrays($fifthItemsArray, "fifthItem", true),
+                    "sixthItem" => sortStatsArrays($sixthItemsArray, "sixthItem", true)                    
                 ),
-                "summoners" => sortStatsArray($sumsArray, "summoners"),
+                "summoners" => sortStatsArrays($sumsArray, "summoners"),
             ), true);
         }
     } else if (isset($_GET["summonerName"]) && isset($_GET["region"])) {
