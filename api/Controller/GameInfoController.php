@@ -85,7 +85,6 @@ function create()
     $summoner1Id = collectId($Asset, $_POST['summoner1']);
     $summoner2Id = collectId($Asset, $_POST['summoner2']);
 
-
     setData($data, "gameId", $gameId);
     setData($data, "accountId", $accountId);
     setData($data, "champId", $champId);
