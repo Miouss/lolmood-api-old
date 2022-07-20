@@ -33,6 +33,7 @@ try {
             $fifthItemsArray = [];
             $sixthItemsArray = [];
             $skillsOrder = [];
+            $evolveOrder = [];
             $sumsArray = [];
 
             foreach ($champStats as &$singleGame) {
@@ -46,6 +47,7 @@ try {
                 array_push($statsModsArray, array($singleGame['statsMods'], $singleGame['win']));
                 array_push($startItemsArray, array($singleGame['startItems'], $singleGame['win']));
                 array_push($skillsOrder, array($singleGame['skills_order'], $singleGame['win']));
+                array_push($evolveOrder, array($singleGame['evolves_order'], $singleGame['win']));
                 array_push($sumsArray, array(array($singleGame['summoner1'], $singleGame['summoner2']), $singleGame['win']));
 
                 $coreItems = array();
@@ -70,7 +72,8 @@ try {
             }
 
             echo json_encode(array(
-                "skills" => sortSkillsOrder($skillsOrder),
+                "skills" => sortSkills($skillsOrder, "skills"),
+                "evolves" => sortSkills($evolveOrder, "evolves"),
                 "runes" => sortStatsArrays($runesArray, "runes"),
                 "statsMods" => sortStatsArrays($statsModsArray, "statsMods"),
                 "startItems" => sortStatsArrays($startItemsArray, "startItems"),
@@ -78,7 +81,7 @@ try {
                     "coreItems" => sortStatsArrays($coreItemsArray, "coreItems"),
                     "fourthItem" => sortStatsArrays($fourthItemsArray, "fourthItem", true),
                     "fifthItem" => sortStatsArrays($fifthItemsArray, "fifthItem", true),
-                    "sixthItem" => sortStatsArrays($sixthItemsArray, "sixthItem", true)                    
+                    "sixthItem" => sortStatsArrays($sixthItemsArray, "sixthItem", true)
                 ),
                 "summoners" => sortStatsArrays($sumsArray, "summoners"),
             ), true);
@@ -128,7 +131,7 @@ try {
 
         $errorMessage = "";
 
-        if(array_key_exists("error", $gameHistoryData)){
+        if (array_key_exists("error", $gameHistoryData)) {
             $errorMessage = $gameHistoryData["error"] . " games couldn't be retrived";
         }
 
@@ -147,7 +150,7 @@ try {
             "KeyStats" => $keyStats
         );
 
-        if($errorMessage !== ""){
+        if ($errorMessage !== "") {
             $data["ErrorMessage"] = $errorMessage;
         }
 
