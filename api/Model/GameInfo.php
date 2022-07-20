@@ -152,7 +152,6 @@ class GameInfo
         addField($gameInfoInfoQueryData, $this->game_info_table, "kills");
         addField($gameInfoInfoQueryData, $this->game_info_table, "deaths");
         addField($gameInfoInfoQueryData, $this->game_info_table, "assists");
-        addField($gameInfoInfoQueryData, $this->game_info_table, "skills_order");
 
         addField($gameInfoInfoQueryData, $this->asset_table, "primaryStyle", "identifier", "primaryStyle_id");
         addField($gameInfoInfoQueryData, $this->asset_table, "subStyle", "identifier", "subStyle_id");
