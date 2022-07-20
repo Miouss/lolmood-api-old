@@ -39,7 +39,9 @@ function getGameStats($puuid, $gameStats, $itemsData){
                                 $participantSkillsOrder .= $skillsNumber;
                             }
                             else{
-                                $participantEvolvesOrder .= $skillsNumber;
+                                if(!str_contains($participantEvolvesOrder, $skillsNumber)){
+                                    $participantEvolvesOrder .= $skillsNumber;
+                                }
                             }
 
                         break;
