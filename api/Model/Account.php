@@ -67,7 +67,7 @@ class Account
                         puuid,
                         level,
                         profile_icon_id,
-                        rank,
+                        `rank`,
                         tier,
                         lp,
                         games,

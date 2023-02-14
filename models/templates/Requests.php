@@ -1,6 +1,6 @@
 <?php
 
-$apiKey = "RGAPI-8c8d890d-ffe8-45fc-bb7a-5806b9b3a582";
+$apiKey = "RGAPI-85820c78-d922-403c-9782-caaa8f71f83a";
 
 define('API-KEY', $apiKey);
 

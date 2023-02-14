@@ -1,18 +1,17 @@
 <?php
 
-function getAccount($host){
+function getAccount($host)
+{
     $riotApiGetAccount = 'https://' . $host . '.api.riotgames.com/lol/summoner/v4/summoners/by-name/' . urlencode($_GET["summonerName"]);
     $databaseApi = $_SERVER['HTTP_HOST'] . '/api/Controller/AccountController.php?action=read&puuid=';
 
     $updatedAccount = apiGetRequest($curl, $riotApiGetAccount, true);
-
     $riotApiGetRank = "https://" . $host . ".api.riotgames.com/lol/league/v4/entries/by-summoner/" . $updatedAccount["id"];
 
     $updateRank = apiGetRequest($curl, $riotApiGetRank, true);
-
-    foreach($updateRank as $queueType){
-        if($queueType["queueType"] === "RANKED_SOLO_5x5"){
-            $updatedAccount["rank"] = $queueType["tier"];
+    foreach ($updateRank as $queueType) {
+        if ($queueType["queueType"] === "RANKED_SOLO_5x5") {
+            $updatedAccount["`rank`"] = $queueType["tier"];
             $updatedAccount["tier"] = $queueType["rank"];
             $updatedAccount["lp"] = $queueType["leaguePoints"];
             $updatedAccount["games"] = $queueType["wins"] + $queueType["losses"];
@@ -27,21 +26,25 @@ function getAccount($host){
 
     $accountStored = apiGetRequest($curl, $databaseApi, false, false);
 
-    if(!$accountStored){
+    if (!$accountStored and !$updatedAccount)
+        throw new Exception('No account found for this summoner name');
+    else if (!$accountStored and !$updateRank)
+        throw new Exception('No ranked games found for this account');
+    else if (!$accountStored and $updateRank)
         apiPostRequest('Account', 'create', $updatedAccount);
-    } else{
+    else {
         $updatedData = array();
 
-        if(($updatedAccount['name'] != $accountStored['name']) or
+        if (($updatedAccount['name'] != $accountStored['name']) or
             ($updatedAccount['profileIconId'] != $accountStored['profile_icon_id']) or
-             ($updatedAccount['summonerLevel'] != $accountStored['level']))
-            {
-                $updatedData['name'] = $updatedAccount['name'];
-                $updatedData['profileIconId'] = $updatedAccount['profileIconId'];
-                $updatedData['summonerLevel'] = $updatedAccount['summonerLevel'];
-                $updatedData['puuid'] = $updatedAccount['puuid'];
-                
-                apiPostRequest('Account', 'update', $updatedData);
+            ($updatedAccount['summonerLevel'] != $accountStored['level'])
+        ) {
+            $updatedData['name'] = $updatedAccount['name'];
+            $updatedData['profileIconId'] = $updatedAccount['profileIconId'];
+            $updatedData['summonerLevel'] = $updatedAccount['summonerLevel'];
+            $updatedData['puuid'] = $updatedAccount['puuid'];
+
+            apiPostRequest('Account', 'update', $updatedData);
         }
     }
 

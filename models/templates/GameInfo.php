@@ -8,7 +8,6 @@ define('queueId', 420); // queueId for picking match 420 = ranked 5v5 soloQ
 function getGameHistoryData($puuid, $region)
 {
     $gamesIdsList =  getGamesIdsList($puuid, $region);
-
     $gameHistoryData =  [];
 
     $count = constant("count");
@@ -135,7 +134,6 @@ function setGameInfo($gameId, $region)
 function getGamesIdsList($summonerPuuid, $region)
 {
     $riotApi = 'https://' . $region . '.api.riotgames.com/lol/match/v5/matches/by-puuid/' . $summonerPuuid . '/ids?queue=' . constant('queueId') . '&start=0&count=' . constant('count');
-
     return apiGetRequest($curl, $riotApi, true);
 }
 

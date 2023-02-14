@@ -28,8 +28,8 @@ function create()
         "profile_icon_id" => (int) $_POST['profileIconId'],
     ];
 
-    if(isset($_POST['rank'])){
-        $data["rank"] = $_POST['rank'];
+    if(isset($_POST["`rank`"])){
+        $data["`rank`"] = $_POST["`rank`"];
         $data["tier"] = $_POST['tier'];
         $data["lp"] = $_POST['lp'];
         $data["games"] = $_POST['games'];
