@@ -10,7 +10,7 @@ CREATE TABLE account (
   name varchar(64) NOT NULL DEFAULT "",
   level int(4) NOT NULL DEFAULT 0,
   profile_icon_id int(4) NOT NULL DEFAULT 0,
-  rank VARCHAR(12) NOT NULL DEFAULT "",
+  `rank` VARCHAR(12) NOT NULL DEFAULT "",
   tier VARCHAR(4) NOT NULL DEFAULT "",
   lp int(4) NOT NULL DEFAULT 0,
   games int(5) NOT NULL DEFAULT 0,
