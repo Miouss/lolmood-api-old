@@ -1,3 +1,5 @@
+# Video demonstration : https://streamable.com/zqwq4h
+
 ## Test the API yourself locally
 ### Use a Xammp server
 I personnaly use Laragon, you can download it here : https://laragon.org/
