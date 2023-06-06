@@ -19,7 +19,7 @@ localhost?summonnerName=?&region=?&count=?
 * Retrive games history of a summoner (player) in a specific region (ex: EUW), the query 'count' is optionnal, it's to specfie how many history games to retrive at once (10 by default 99 max but you will be limited due to api key's rates limits) and longer the number is, longer the loading is.
 This endpoint makes a call at the Riot Public API (the call takes some times, it's normal), then store the data on a MySQL DB and finnaly display the result in a JSON.
 
-* You can test the endpoint with the following data : localhost?summonerName=Noah7&region=EUW
+* You can test the endpoint with the following data : localhost?summonerName=SLY%20Wakz&region=EUW
 
 
 localhost?champName=?
